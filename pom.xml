@@ -108,7 +108,7 @@
 				<configuration>
 					<url>http://www.pikitori.com:80/manager/text</url>
 					<path>/facebookSite1</path>
-					<username>pikimanaer</username>
+					<username>pikimanager</username>
 					<password>piki</password>
 				</configuration>
 			</plugin>
