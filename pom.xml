@@ -107,7 +107,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
 					<url>http://www.pikitori.com:80/manager/text</url>
-					<path>/facehub</path>
+					<path>/facebookSite1</path>
 					<username>pikimanaer</username>
 					<password>piki</password>
 				</configuration>
