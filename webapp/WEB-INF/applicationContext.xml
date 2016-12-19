@@ -19,7 +19,7 @@
 	<context:annotation-config />
 	
 	<context:component-scan
-		base-package="com.bit2016.mysite.repository, com.bit2016.mysite.service, com.bit2016.mysite.exception, com.bit2016.mysite.aspect">
+		base-package="com.pikitori.web.repository, com.pikitori.web.service, com.pikitori.web.exception, com.pikitori.web.aspect">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
