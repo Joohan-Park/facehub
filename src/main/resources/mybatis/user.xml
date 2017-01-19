@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+	<select id="getAlluser" resultType="User">
+	<![CDATA[
+	select 	user_no,
+			user_id,
+			user_password,
+			user_name,
+			user_regdate as user_reg_date ,
+			user_role,
+			user_status,
+			user_profile_url,
+			user_profile_msg,
+			user_post_count,
+			user_follower_count,
+			user_following_count,
+			user_social_index,
+			user_social_id 
+	from pikiuser
+	]]>
+	</select>
+
+	<select id="checkEmail" parameterType="string" resultType="User">
+	<![CDATA[
+	select user_no, user_id from pikiuser 
+	where user_id=#{user_id}
+	]]>
+
+	</select>
+
+	<select id="checkNickname" parameterType="string" resultType="User">
+	<![CDATA[
+	select user_no, user_name from pikiuser 
+	where user_name=#{user_name}
+	]]>
+
+	</select>
+
+	<insert id="addUser" parameterType="User">
+	<![CDATA[
+	insert into pikiuser(user_id,
+						user_password,
+						user_name,
+						user_regdate,
+						user_role,
+						user_status,
+						user_profile_url,
+						user_profile_msg,
+						user_post_count,
+						user_follower_count,
+						user_following_count,
+						user_social_index,
+						user_social_id) 
+	values(#{user_id},#{user_password},#{user_name},sysdate(),1,1,"www","테스트용 프로필상태메시지",0,0,0,1,null)
+	]]>
+	</insert>
+
+	<select id="getByEmailAndPassword" parameterType="User"
+		resultType="User">
+	<![CDATA[
+	select user_no, 
+		   user_id,
+		   user_name,
+		   user_regdate as user_reg_date,
+		   user_role,
+		   user_status,
+		   user_profile_url,
+		   user_profile_msg,
+		   user_post_count,
+		   user_follower_count,
+		   user_following_count,
+		   user_social_index,
+		   user_social_id
+		    from pikiuser where user_id=#{user_id} && user_password=#{user_password}
+	]]>
+	</select>
+
+	<select id="getBySocialID" parameterType="User" resultType="User">
+	<![CDATA[
+		select user_no, 
+		   user_id,
+		   user_name,
+		   user_regdate as user_reg_date,
+		   user_role,
+		   user_status,
+		   user_profile_url,
+		   user_profile_msg,
+		   user_post_count,
+		   user_follower_count,
+		   user_following_count,
+		   user_social_index,
+		   user_social_id
+		    from pikiuser where user_social_id=#{user_social_id}
+	]]>
+	</select>
+	
+	<insert id="addF_User" parameterType="User">
+	<![CDATA[
+		insert into pikiuser(user_id,
+						user_password,
+						user_name,
+						user_regdate,
+						user_role,
+						user_status,
+						user_profile_url,
+						user_profile_msg,
+						user_post_count,
+						user_follower_count,
+						user_following_count,
+						user_social_index,
+						user_social_id) 
+	values(null,null,#{user_name},sysdate(),1,1,#{user_profile_url},"테스트용 프로필상태메시지",0,0,0,#{user_social_index},#{user_social_id})
+	]]>
+	</insert>
+
+
+</mapper>
+

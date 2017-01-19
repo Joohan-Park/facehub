@@ -15,11 +15,10 @@
         http://www.springframework.org/schema/task
         http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-	
+
 	<context:annotation-config />
-	
-	<context:component-scan
-		base-package="com.pikitori.web.repository, com.pikitori.web.service, com.pikitori.web.exception, com.pikitori.web.aspect">
+
+	<context:component-scan base-package="com.pikitori.web, com.pikitori.mecavo ">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
@@ -28,4 +27,24 @@
 			expression="org.springframework.stereotype.Component" />
 	</context:component-scan>
 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://www.pikitori.com:3306/bit2016?useUnicode=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
+		<property name="username" value="pikitori" />
+		<property name="password" value="piki" />
+		<!-- 특정 시간마다 validationQuery를 실행 셋팅 시작 -->
+	</bean>
+
+	<!-- MyBatis SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis/configuration.xml" />
+	</bean>
+
+
+	<!-- MyBatis SqlSessionTemplate -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
 </beans> 
