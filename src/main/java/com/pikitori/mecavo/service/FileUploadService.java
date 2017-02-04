@@ -17,13 +17,16 @@ import com.pikitori.web.vo.PictureVo;
 @Repository
 public class FileUploadService {
 	
-	private static String domain = "http://192.168.1.4:8080/facebookSite1" ;
+//	private static String domain = "http://192.168.1.4:8080/facebookSite1" ;
+	private static String domain = "http://www.pikitori.com/facebookSite1" ;
 	private static String image = "/piki/img";
 	private static String movie = "/piki/mp4";
-	private static final String SAVE_PIKI_IMAGE = "D:\\piki";
-	private static final String SAVE_TMP = "D:\\piki_tmp";
-	private static final String SAVE_MOVIE = "D:\\piki_movie";
-	
+//	private static final String SAVE_PIKI_IMAGE = "D:\\piki";
+//	private static final String SAVE_TMP = "D:\\piki_tmp";
+//	private static final String SAVE_MOVIE = "D:\\piki_movie";
+	private static final String SAVE_PIKI_IMAGE = "/piki";
+	private static final String SAVE_TMP = "/piki_tmp";
+	private static final String SAVE_MOVIE = "/piki_movie";	
 	@Autowired
 	private FileUtils utils;
 	

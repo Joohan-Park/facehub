@@ -75,7 +75,7 @@ public class FileUtils {
 		return fileName;
 	}
 	
-	private static final String ffmpegPath = "/Users/admin/Downloads/source/ffmpeg-win64/ffmpeg/bin/ffmpeg.exe";
+//	private static final String ffmpegPath = "/Users/admin/Downloads/source/ffmpeg-win64/ffmpeg/bin/ffmpeg.exe";
 	public String convertMp4(String tmppath, String resultpath, String speed){
 		String filename = generateSaveFileName("mp4");
 		String fResult = resultpath+"/"+filename;
@@ -115,7 +115,7 @@ public class FileUtils {
 //				fResult ,"-y"};
 		
 		String[] cmdLine = new String[] {
-				ffmpegPath, 
+				"ffmpeg", 
 				"-framerate",
 				"1/5",
 				"-f",
