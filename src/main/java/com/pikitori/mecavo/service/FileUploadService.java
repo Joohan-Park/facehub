@@ -26,7 +26,7 @@ public class FileUploadService {
 //	private static final String SAVE_MOVIE = "D:\\piki_movie";
 	private static final String SAVE_PIKI_IMAGE = "/piki";
 	private static final String SAVE_TMP = "/piki_tmp";
-	private static final String SAVE_MOVIE = "/piki_movie";	
+	private static final String SAVE_MOVIE = "/piki_movie";
 	@Autowired
 	private FileUtils utils;
 	
@@ -67,6 +67,7 @@ public class FileUploadService {
 		//4. 동영상 정보를 update 합니다.
 		 boolean result = postDao.updatePostMovie(postNo, domain + movie+ "/" + utils.convertMp4(SAVE_TMP,SAVE_MOVIE,speed));
 		
+		 System.out.println("makeMovie result:  "+ result);
 		//5. tmp 폴더를 삭제합니다.
 		return result && utils.deleteDir(SAVE_TMP);
 	}
