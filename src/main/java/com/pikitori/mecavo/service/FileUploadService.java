@@ -64,12 +64,15 @@ public class FileUploadService {
 			utils.writeFile(f,SAVE_TMP,tmpfile);
 			tmpfile = "";
 		}
+		File f= new File(SAVE_TMP);
+		boolean result = f.isDirectory();
 		//4. 동영상 정보를 update 합니다.
-		 boolean result = postDao.updatePostMovie(postNo, domain + movie+ "/" + utils.convertMp4(SAVE_TMP,SAVE_MOVIE,speed));
+//		 boolean result = postDao.updatePostMovie(postNo, domain + movie+ "/" + utils.convertMp4(SAVE_TMP,SAVE_MOVIE,speed));
 		
 		 System.out.println("makeMovie result:  "+ result);
 		//5. tmp 폴더를 삭제합니다.
-		return result && utils.deleteDir(SAVE_TMP);
+//		return result && utils.deleteDir(SAVE_TMP);
+		 return result;
 	}
 	public List<PictureVo> uploadFiles(List<MultipartFile> fileList, List<Long> pictureNoList) throws IOException{
 		List<PictureVo> pictureList = new ArrayList<PictureVo>();
