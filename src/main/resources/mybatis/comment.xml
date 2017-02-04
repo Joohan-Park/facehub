@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+
+<select id="showreplyList" parameterType="Comment" resultType="Comment">
+	<![CDATA[
+	select comment_content from comment where post_no=#{post_no}
+	]]>
+	</select>
+	
+<insert id="addReply" parameterType="Comment">
+	<![CDATA[
+	insert into comment(comment_content,
+						comment_regdate,
+						user_no,
+						post_no)
+	values(#{comment_content},sysdate(),#{user_no},#{post_no})
+	]]>
+	</insert>
+
+</mapper>

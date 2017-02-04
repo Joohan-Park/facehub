@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pikitori.web.repository.UserDao;
 import com.pikitori.web.vo.UserVo;
@@ -20,7 +21,6 @@ public class UserService {
 	}
 
 	public boolean checkEmail(String user_id) {
-		// TODO Auto-generated method stub
 		return (userDao.getEmail(user_id) != null);
 	}
 
@@ -29,6 +29,9 @@ public class UserService {
 	}
 
 	public UserVo login(UserVo user) {
+		if(user.getUser_password()==null || "".equals(user.getUser_password())){
+			return userDao.LoginbyIndex(user);
+		}
 		return userDao.Login(user);
 	}
 
@@ -42,4 +45,24 @@ public class UserService {
 		}
 		return userDao.isExistF_User(user);
 	}
+
+//	public boolean updateProfileImg(String filepath, UserVo user) {
+//		return userDao.updateProfileImg(filepath, user) == 1 ;
+//	}
+
+	public UserVo updateProfile(UserVo user) {
+		return userDao.updateProfile(user);
+	}
+
+	public UserVo getUser(Long user_no) {
+		return userDao.getUser(user_no);
+	}
+	
+	public List<UserVo> searchNameList(String str) {
+		return userDao.searchNameList(str);
+	}
+
+	
+
+
 }

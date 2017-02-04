@@ -73,7 +73,9 @@
 		<!-- defaultEncoding -->
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
-
+	
+	<mvc:resources mapping="/piki/img/**" location="file:D://piki/" />
+	<mvc:resources mapping="/piki/mp4/**" location="file:D://piki_movie/" />
 	<!-- @valid MessageSource -->
 	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> 
 		<property name="defaultEncoding" value="utf-8"/> <property name="basenames"> 

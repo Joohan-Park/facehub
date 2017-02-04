@@ -2,9 +2,9 @@ package com.pikitori.util;
 
 public class JSONResult {
 
-	private String result;  // "success" or "fail"
-	private String message; // result�� "fail" �� ��  ����
-	private Object data;    // result�� "succes" �� ��  �����ؾ� �� ������ ��ü
+	private String result;  
+	private String message; 
+	private Object data;    
 
 	public static JSONResult error( String message ) {
 		return new JSONResult( false, null, message );

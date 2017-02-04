@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="picture">
+
+	<insert id="addPicture" parameterType="picture">
+	
+	
+	
+	insert into picture(picture_url,
+					    picture_ext,
+						picture_location,
+						picture_lat,
+						picture_lng,
+						picture_local_url,
+						user_no)
+		values
+			(#{picture_url},
+			#{picture_ext},
+			#{picture_location},
+			#{picture_lat},
+			#{picture_lng},
+			#{picture_local_url},
+			#{user_no})
+			
+	<selectKey keyProperty="picture_no" resultType="Long">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+	
+		
+	</insert>
+	
+	<update id="updatePictureURL" parameterType="picture" >
+		
+			UPDATE picture 
+			set
+				picture_url=#{picture_url}, picture_ext=#{picture_ext}
+			where
+				picture_no = #{picture_no}
+				
+	</update>
+	
+	<select id="getpictureuseingmap" parameterType="picture" resultType="picture">
+		select picture_url, 
+			picture_location, 
+			picture_lat, 
+			picture_lng, 
+			picture_local_url, 
+			user_no from picture 
+		where picture_location is not null 
+				and user_no = #{user_no}
+	</select>
+
+</mapper>

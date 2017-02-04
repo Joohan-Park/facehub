@@ -1,10 +1,10 @@
 package com.pikitori.web.vo;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class UserVo {
 	private Long user_no;
 	
@@ -14,12 +14,14 @@ public class UserVo {
 	@Length(min=7,max=15)
 	private String user_password;
 	
+	@NotNull
 	@Length(min=3,max=19)
 	private String user_name;
 	private String user_reg_date;
 	private Long user_role;
 	private Long user_status;
 	private String user_profile_url;
+	@Length(max=150)
 	private String user_profile_msg;
 	private Long user_post_count;
 	private Long user_follower_count;

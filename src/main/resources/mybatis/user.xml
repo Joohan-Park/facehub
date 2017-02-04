@@ -21,7 +21,7 @@
 	from pikiuser
 	]]>
 	</select>
-
+	<!-- getEmail -->
 	<select id="checkEmail" parameterType="string" resultType="User">
 	<![CDATA[
 	select user_no, user_id from pikiuser 
@@ -29,7 +29,7 @@
 	]]>
 
 	</select>
-
+	<!-- getUserName -->
 	<select id="checkNickname" parameterType="string" resultType="User">
 	<![CDATA[
 	select user_no, user_name from pikiuser 
@@ -37,7 +37,7 @@
 	]]>
 
 	</select>
-
+	<!-- CreateUser -->
 	<insert id="addUser" parameterType="User">
 	<![CDATA[
 	insert into pikiuser(user_id,
@@ -57,8 +57,7 @@
 	]]>
 	</insert>
 
-	<select id="getByEmailAndPassword" parameterType="User"
-		resultType="User">
+	<select id="getByEmailAndPassword" parameterType="User" resultType="User">
 	<![CDATA[
 	select user_no, 
 		   user_id,
@@ -74,6 +73,25 @@
 		   user_social_index,
 		   user_social_id
 		    from pikiuser where user_id=#{user_id} && user_password=#{user_password}
+	]]>
+	</select>
+	
+	<select id="getBySocailIndex" parameterType="User" resultType="User">
+	<![CDATA[
+	select user_no, 
+		   user_id,
+		   user_name,
+		   user_regdate as user_reg_date,
+		   user_role,
+		   user_status,
+		   user_profile_url,
+		   user_profile_msg,
+		   user_post_count,
+		   user_follower_count,
+		   user_following_count,
+		   user_social_index,
+		   user_social_id
+		    from pikiuser where user_id=#{user_id} && user_social_index=#{user_social_index}
 	]]>
 	</select>
 
@@ -95,7 +113,7 @@
 		    from pikiuser where user_social_id=#{user_social_id}
 	]]>
 	</select>
-	
+	<!-- CreateF_user -->
 	<insert id="addF_User" parameterType="User">
 	<![CDATA[
 		insert into pikiuser(user_id,
@@ -115,6 +133,80 @@
 	]]>
 	</insert>
 
+	<update id="update_profile" parameterType="User">
+	 <![CDATA[ 
+			update pikiuser
+				set user_name=#{user_name},
+					user_profile_msg=#{user_profile_msg},
+					user_profile_url = #{user_profile_url}
+					where user_no= #{user_no}
+	  ]]>
+	</update>
+
+<!-- 	<update id="update_profileUrl" parameterType="HashMap">
+	 <![CDATA[ 
+			update pikiuser
+				set user_profile_url=#{url} where user_id=#{user_id}
+	  ]]>
+	</update> -->
+	
+	<select id="getByNo" parameterType="Long" resultType="User">
+	<![CDATA[
+		select user_no, 
+		   user_id,
+		   user_name,
+		   user_regdate as user_reg_date,
+		   user_role,
+		   user_status,
+		   user_profile_url,
+		   user_profile_msg,
+		   user_post_count,
+		   user_follower_count,
+		   user_following_count,
+		   user_social_index,
+		   user_social_id
+		    from pikiuser where user_no=#{no}
+	]]>
+	</select>
+
+<select id="searchNameList" parameterType="user" resultType="user">
+  		<![CDATA[
+  			select pikiuser.user_no, pikiuser.user_id, pikiuser.user_name, pikiuser.user_profile_url, pikiuser.user_profile_msg 
+  			from pikiuser where user_id like CONCAT('%',#{user_id },'%') || user_name like CONCAT('%',#{user_name},'%')
+  		]]>
+	</select>
+	
+	<select id="followlist" parameterType="user" resultType="follow"> 
+	<![CDATA[
+	select pikiuser.user_no as user_no, pikiuser.user_id as user_id, pikiuser.user_name as user_name,
+		u.user_no as user_no_friend,
+		u.user_id as user_id_friend,
+		u.user_name as user_name_friend,
+		u.user_profile_url as user_profile_url_friend,
+		u.user_profile_msg as user_profile_msg_friend
+		from pikiuser 
+		INNER join follow f on (f.user_no = pikiuser.user_no)
+		INNER join pikiuser u on (u.user_no = f.user_no_friend) where pikiuser.user_no = #{user_no }
+	]]>
+	</select>
+
+	<select id="followerlist" parameterType="user" resultType="follow">
+	<![CDATA[
+		select 	u.user_no as user_no,
+				u.user_id as user_id,
+		  		u.user_name as user_name,
+				pikiuser.user_no as user_no_friend,
+				pikiuser.user_id as user_id_friend,
+				pikiuser.user_name as user_name_friend,
+				pikiuser.user_profile_url as user_profile_url_friend,
+				pikiuser.user_profile_msg as user_profile_msg_friend
+		from pikiuser 
+				INNER join follow f on (f.user_no = pikiuser.user_no)
+				INNER join pikiuser u on (u.user_no = f.user_no_friend) 
+		where user_no_friend = #{user_no}
+
+	]]>
+	</select>
 
 </mapper>
 

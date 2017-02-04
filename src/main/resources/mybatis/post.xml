@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="post">
+
+	<insert id ="addPost" parameterType="post">
+	
+	insert into post(post_content,
+					 post_movie,
+					 post_regdate,
+					 post_ispublic,
+					 post_comment_count,
+					 post_heart_count,
+					 user_no)
+	values(
+		#{post_content},
+		#{post_movie},
+		now(),
+		#{post_ispublic},
+		0,
+		0,
+		#{user_no})
+	
+	<selectKey keyProperty="post_no" resultType="Long">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+
+	</insert>
+
+	<insert id="addAlbum" parameterType="HashMap">
+		insert into album(post_no,picture_no)
+			values (#{post_no},#{picture_no})
+	</insert>
+	
+	<insert id="addPostTag" parameterType="HashMap">
+		insert into post_tag(post_no,tag_no)
+			values (#{post_no},#{tag_no})
+	</insert>
+	
+	<update id="updateMovieUrl" parameterType="HashMap">
+		update post set post_movie = #{post_movie}
+		where post_no = #{post_no}
+	</update>
+	
+	<select id="showpostList" parameterType="user" resultType="Post">
+	<![CDATA[
+		select a.post_content as post_content,
+			   a.post_heart_count as post_heart_count,
+			   a.post_movie as post_movie,
+			   b.user_name as user_name, 
+			   b.user_profile_url as user_profile_url
+				from post a,
+			 		 pikiuser b 
+		where a.user_no=#{user_no } 
+		  and b.user_no=#{user_no } 
+	]]>
+	</select>
+	
+</mapper>

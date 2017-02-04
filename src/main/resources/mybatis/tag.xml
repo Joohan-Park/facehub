@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tag">
+
+	<insert id="addTag" parameterType="tag">
+	insert into tag(tag_name,
+					tag_search_count)
+		values
+			(#{tag_name},0)
+		<selectKey keyProperty="tag_no" resultType="Long">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+	</insert>
+	
+	<select id="searchTagPostList" parameterType="tag" resultType="tag">
+    	<![CDATA[
+   		select tag_no, tag_name, tag_search_count from tag 
+   		where tag_name like CONCAT(#{tag_name},'%') 
+    	]]>
+    </select> 
+	
+</mapper>

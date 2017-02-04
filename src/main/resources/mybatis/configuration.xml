@@ -4,11 +4,21 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="user" type="com.pikitori.web.vo.UserVo"/>
+		<typeAlias alias="post" type="com.pikitori.web.vo.PostVo"/>
+		<typeAlias alias="picture" type="com.pikitori.web.vo.PictureVo"/>
+		<typeAlias alias="tag" type="com.pikitori.web.vo.TagVo"/>
+		<typeAlias alias="comment" type="com.pikitori.web.vo.CommentVo"/>
+		<typeAlias alias="follow" type="com.pikitori.web.vo.FollowVo"/>
 	</typeAliases>
 
 
 	<mappers>
 		<mapper resource="mybatis/user.xml" />
+		<mapper resource="mybatis/picture.xml" />
+		<mapper resource="mybatis/post.xml" />
+		<mapper resource="mybatis/tag.xml" />
+		<mapper resource="mybatis/comment.xml" />
+		<mapper resource="mybatis/follow.xml" />
 	</mappers>
 
 </configuration>
